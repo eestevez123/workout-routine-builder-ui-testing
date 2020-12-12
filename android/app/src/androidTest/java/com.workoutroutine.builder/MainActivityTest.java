@@ -13,6 +13,7 @@ import kotlin.jvm.JvmField;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -36,10 +37,39 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> activityActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
 
     @Test
-    public void loginButtonThere() throws InterruptedException {
+    public void signUpButtonText() throws InterruptedException {
         TimeUnit.SECONDS.sleep(10); // wait for 10 seconds to get slash screen away
-        ViewInteraction loginButtonTest = onView(
-                allOf(withContentDescription("LoginButton"), isDisplayed()));
-        loginButtonTest.perform(click());
+        ViewInteraction signUpButton = onView(
+                allOf(withContentDescription("signUpButton"), isDisplayed()));
+        signUpButton.perform(click());
     }
+
+    @Test
+    public void signUpPossible() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(10); // wait for 10 seconds to get slash screen away
+        ViewInteraction signUpButton = onView(
+                allOf(withContentDescription("signUpButton"), isDisplayed()));
+        signUpButton.perform(click());
+
+        ViewInteraction nameTextBoxRegister = onView(
+                allOf(withContentDescription("nameTextBoxRegister"), isDisplayed()));
+        nameTextBoxRegister.perform(typeText("John Doe"));
+
+        ViewInteraction createEmailTextBox = onView(
+                allOf(withContentDescription("createEmailTextBox"), isDisplayed()));
+        createEmailTextBox.perform(typeText("JohnDoe@email.com"));
+
+        ViewInteraction createPasswordTextBox = onView(
+                allOf(withContentDescription("createPasswordTextBox"), isDisplayed()));
+        createPasswordTextBox.perform(typeText("password"));
+    }
+
+    @Test
+    public void loginButtonTest() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(10); // wait for 10 seconds to get slash screen away
+        ViewInteraction LoginButton = onView(
+                allOf(withContentDescription("LoginButton"), isDisplayed()));
+        LoginButton.perform(click());
+    }
+
 }
